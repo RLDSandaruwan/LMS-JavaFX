@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="context" prefHeight="400.0" prefWidth="400.0"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pcl.lms.controller.VerifyOTPFormController"
+            style="-fx-background-color: #f7f7f7;"><!-- Back Button -->
+    <Button onAction="#navigateEmailVerificationFormOnAction"
+            prefHeight="32.0" prefWidth="134.0"
+            style="-fx-background-color: #4CAF50; -fx-background-radius: 5;"
+            text="← Back to Email"
+            textFill="WHITE"
+            AnchorPane.leftAnchor="15.0"
+            AnchorPane.topAnchor="15.0">
+        <font>
+            <Font name="System Bold" size="14.0"/>
+        </font>
+    </Button>
+
+    <!-- Center Content -->
+    <VBox alignment="CENTER" spacing="15.0"
+          AnchorPane.topAnchor="60.0"
+          AnchorPane.bottomAnchor="80.0"
+          AnchorPane.leftAnchor="25.0"
+          AnchorPane.rightAnchor="25.0">
+
+        <!-- Title -->
+        <Label text="Validate your OTP" textFill="#2d3436">
+            <font>
+                <Font name="System Bold" size="26.0"/>
+            </font>
+        </Label>
+
+        <!-- Subtitle -->
+        <Label text="We’ve sent a 6-digit code to your email address."
+               textAlignment="CENTER"
+               wrapText="true"
+               textFill="#6c757d">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+
+        <!-- Email Display and Change -->
+        <HBox alignment="CENTER" spacing="5.0">
+            <Label fx:id="lblUserEmail" text="your@email.com" textFill="#4a0202">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Label>
+            <Hyperlink text="Change Email"
+                       onAction="#navigateEmailVerificationFormOnAction"
+                       style="-fx-text-fill: #6c5ce7;"/>
+        </HBox>
+
+        <!-- OTP Input -->
+        <TextField fx:id="txtOtp"
+                   prefHeight="45.0"
+                   promptText="Enter your 6-digit OTP"
+                   style="-fx-background-color: white; -fx-border-color: #6c5ce7; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+
+        <!-- Verify Button -->
+        <Button maxWidth="1.7976931348623157E308"
+                onAction="#navigatePasswordResetFormOnAction"
+                prefHeight="50.0"
+                style="-fx-background-color: #00b894; -fx-background-radius: 5;"
+                text="Verify OTP"
+                textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="18.0"/>
+            </font>
+        </Button>
+
+    </VBox>
+
+    <!-- Footer -->
+    <HBox alignment="CENTER" spacing="10"
+          AnchorPane.bottomAnchor="15.0"
+          AnchorPane.leftAnchor="20.0"
+          AnchorPane.rightAnchor="20.0">
+        <Label fx:id="lblCompany" text="© Company Name" textFill="#999999"/>
+        <Label text="|" textFill="#999999"/>
+        <Label fx:id="lblVersion" text="v1.0" textFill="#999999"/>
+    </HBox>
+
+</AnchorPane>

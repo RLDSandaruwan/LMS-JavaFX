@@ -1,0 +1,51 @@
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+### Java ###
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.tmp
+*.swp
+*.bak
+
+### Gradle/Maven ###
+.gradle/
+build/
+target/
+
+### OS files ###
+Thumbs.db
+
+### Custom Ignore ###
+# Ignore environment/config package (contains secrets)
+src/com/pcl/lms/env/
