@@ -11,17 +11,35 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #f7f7f7;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pcl.lms.controller.DashBoardFormController">
+<AnchorPane fx:id="context" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #f7f7f7;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pcl.lms.controller.DashBoardFormController">
     <children>
         <VBox alignment="TOP_CENTER" prefHeight="450.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
-            <HBox alignment="CENTER_LEFT" prefHeight="60.0" style="-fx-background-color: #ffffff; -fx-padding: 15 20;">
-                <Label text="LMS DASHBOARD" textFill="#007bff">
-                    <font>
-                        <Font name="System Bold" size="20.0" />
-                    </font>
-                </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="70.0" style="-fx-background-color: #ffffff; -fx-padding: 15 20;">
+                <!-- Left side: Title Date/Time -->
+                <VBox alignment="CENTER_LEFT" spacing="3">
+                    <Label text="LMS DASHBOARD" textFill="#007bff">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
+                    </Label>
 
+                    <!-- Date and Time on same line -->
+                    <HBox spacing="10">
+                        <Label fx:id="lblDate" text="2025-10-31" textFill="#6c757d">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lblTime" text="17:00:00" textFill="#6c757d">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                    </HBox>
+                </VBox>
+
+                <!-- Right side: User + Logout -->
                 <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
                     <Label text="Welcome, [User Name]" textFill="#6c757d">
                         <font>
@@ -31,7 +49,7 @@
                             <Insets right="20.0" />
                         </HBox.margin>
                     </Label>
-                    <Button mnemonicParsing="false" onAction="#btnNavigatetoWelcomeScreenOnAction" style="-fx-background-color: #dc3545; -fx-background-radius: 5;" text="Logout" textFill="WHITE">
+                    <Button mnemonicParsing="false" onAction="#btnNavigatetoLoginFormOnAction" style="-fx-background-color: #dc3545; -fx-background-radius: 5;" text="Logout" textFill="WHITE">
                         <font>
                             <Font name="System Bold" size="14.0" />
                         </font>
@@ -49,7 +67,7 @@
                     <Insets bottom="20.0" left="20.0" right="20.0" top="30.0" />
                 </padding>
 
-                <Button prefHeight="100.0" prefWidth="120.0" style="-fx-background-color: #6c5ce7; -fx-background-radius: 8;" text="STUDENTS" textAlignment="CENTER" textFill="WHITE">
+                <Button onAction="#studentManagementOnAction" prefHeight="100.0" prefWidth="120.0" style="-fx-background-color: #6c5ce7; -fx-background-radius: 8;" text="STUDENTS" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
@@ -96,7 +114,7 @@
             </FlowPane>
 
             <VBox alignment="BOTTOM_RIGHT" style="-fx-padding: 0 10 10 0;" VBox.vgrow="ALWAYS">
-                <Label text="LMS v1.0" textFill="#999999">
+                <Label fx:id="lblVersion" text="LMS v1.0" textFill="#999999">
                     <font>
                         <Font size="10.0" />
                     </font>
