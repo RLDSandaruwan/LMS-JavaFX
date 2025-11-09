@@ -6,6 +6,7 @@ module lms {
     requires jakarta.mail;
 
     opens com.pcl.lms to javafx.controls, javafx.fxml,javafx.graphics;
+    opens com.pcl.lms.view.tm to javafx.base;
 
     //optional
 
