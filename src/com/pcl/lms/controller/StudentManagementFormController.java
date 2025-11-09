@@ -22,7 +22,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Optional;
 
-public class StudentManagementForm {
+public class StudentManagementFormController {
     public TextField txtStudentID;
     public TextField txtStudentName;
     public TextField txtStudentAddress;
