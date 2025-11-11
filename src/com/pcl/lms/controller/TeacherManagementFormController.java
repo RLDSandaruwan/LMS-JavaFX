@@ -53,7 +53,7 @@ public class TeacherManagementFormController {
         //search text
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
             this.searchText = newValue;
-            setTableData(newValue);
+            setTableData(searchText);
         });
 
     }
@@ -67,10 +67,11 @@ public class TeacherManagementFormController {
         btnSave.setText("Update");
     }
 
-    private void setTableData(String newValue){
-        ObservableList<TeacherTm> tacherTm = FXCollections.observableArrayList();
+    //fill the table
+    private void setTableData(String searchText){
+        ObservableList<TeacherTm> teacherTm = FXCollections.observableArrayList();
         for(Teacher th:Database.teacherTable){
-            if(th.getName().contains(newValue)){
+            if(th.getName().toLowerCase().contains(searchText.toLowerCase())){
                 Button btn = new Button("Delete");
                 TeacherTm tm = new TeacherTm(
                         th.getId(),
@@ -79,6 +80,7 @@ public class TeacherManagementFormController {
                         th.getAddress(),
                         btn
                 );
+                //delete button
                 btn.setOnAction((ActionEvent event) -> {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION,"Are you sure you want to delete "+th.getId()+" taecher?",ButtonType.YES,ButtonType.NO);
                     alert.showAndWait();
@@ -90,9 +92,10 @@ public class TeacherManagementFormController {
                         setTableData(searchText);
                     }
                 });
-                tacherTm.add(tm);}
+                teacherTm.add(tm);
+            }
         }
-        tblTeacher.setItems(tacherTm);
+        tblTeacher.setItems(teacherTm);
     }
 
     private void setTeacherId() {
