@@ -1,5 +1,6 @@
 package com.pcl.lms.DB;
 
+import com.pcl.lms.model.Program;
 import com.pcl.lms.model.Student;
 import com.pcl.lms.model.Teacher;
 import com.pcl.lms.model.User;
@@ -14,6 +15,7 @@ public class Database {
     public static ArrayList<User> userTable = new ArrayList<>();
     public static ArrayList<Student>  studentTable = new ArrayList<>();
     public static ArrayList<Teacher>  teacherTable = new ArrayList<>();
+    public static ArrayList<Program> programTable = new ArrayList<>();
 
 
     static{
