@@ -1,6 +1,7 @@
 package com.pcl.lms.DB;
 
 import com.pcl.lms.model.Student;
+import com.pcl.lms.model.Teacher;
 import com.pcl.lms.model.User;
 import com.pcl.lms.utill.security.PasswordManager;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 public class Database {
     public static ArrayList<User> userTable = new ArrayList<>();
     public static ArrayList<Student>  studentTable = new ArrayList<>();
+    public static ArrayList<Teacher>  teacherTable = new ArrayList<>();
 
 
     static{
@@ -22,5 +24,6 @@ public class Database {
 //            throw new RuntimeException(e);
 //        }
         studentTable.add(new Student("S-6","DS","123", new Date()));
+        teacherTable.add(new Teacher("T-1","Gihan","123/4 Kandy","071111678"));
     }
 }

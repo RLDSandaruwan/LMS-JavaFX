@@ -22,7 +22,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Optional;
 
-public class StudentManagementForm {
+public class StudentManagementFormController {
     public TextField txtStudentID;
     public TextField txtStudentName;
     public TextField txtStudentAddress;
@@ -54,9 +54,10 @@ public class StudentManagementForm {
             }
         });
 
+        //search text
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
             this.searchText = newValue;
-            setTableData(newValue);
+            setTableData(searchText);
         });
     }
 
@@ -69,10 +70,11 @@ public class StudentManagementForm {
         btnSave.setText("update");
     }
 
-    private void setTableData(String newValue) {
+    //fill the table
+    private void setTableData(String searchText) {
         ObservableList<StudentTm> studentTm = FXCollections.observableArrayList();
         for (Student st:Database.studentTable){
-            if (st.getName().contains(newValue)){
+            if (st.getName().toLowerCase().contains(searchText.toLowerCase())){
                 Button btn = new Button("Delete");
                 st.getDOB();
                 StudentTm tm = new StudentTm(
@@ -82,6 +84,8 @@ public class StudentManagementForm {
                         new SimpleDateFormat("yyyy-MM-dd").format(st.getDOB()),
                         btn
                 );
+
+                //delete button
                 btn.setOnAction((ActionEvent event) -> {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION,"Are you sure you want to delete "+st.getId()+" student?",ButtonType.YES,ButtonType.NO);
                     alert.showAndWait();
@@ -149,7 +153,7 @@ public class StudentManagementForm {
                 setStudentID();
                 clearFields();
                 setTableData(searchText);
-                btnSave.setText("save");
+                btnSave.setText("Save");
 
             }
         }
@@ -157,6 +161,8 @@ public class StudentManagementForm {
 
     public void newStudentOnAction(ActionEvent actionEvent) {
         clearFields();
+        setStudentID();
+        btnSave.setText("Save");
     }
 
     public void backToHomeOnAction(ActionEvent actionEvent) throws IOException {

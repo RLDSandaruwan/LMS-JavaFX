@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="context" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pcl.lms.controller.TeacherManagementFormController">
+   <children>
+      <Text fill="#6c5ce7" layoutX="40.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teacher Management">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtTeacherID" editable="false" layoutX="40.0" layoutY="85.0" prefHeight="26.0" prefWidth="170.0" promptText="Teacher ID" />
+      <TextField fx:id="txtTeacherName" layoutX="223.0" layoutY="85.0" prefHeight="26.0" prefWidth="169.0" promptText="Teacher Name" />
+      <TextField fx:id="txtContactNumber" layoutX="403.0" layoutY="85.0" prefHeight="26.0" prefWidth="170.0" promptText="Contact Number" />
+      <Button fx:id="btnSave" layoutX="532.0" layoutY="126.0" mnemonicParsing="false" onAction="#saveOnAction" style="-fx-background-color: green;" text="Save" textFill="#fff7f7">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="479.0" layoutY="33.0" mnemonicParsing="false" onAction="#newTeacherOnAction" prefHeight="26.0" prefWidth="99.0" text="New Teacher" />
+      <Button layoutX="341.0" layoutY="34.0" mnemonicParsing="false" onAction="#backToHomeOnAction" prefHeight="26.0" prefWidth="121.0" text="Back to Dashboard" />
+      <Separator layoutX="10.0" layoutY="72.0" prefHeight="2.0" prefWidth="600.0" />
+      <TextField fx:id="txtTeacherAddress" layoutX="40.0" layoutY="125.0" prefHeight="26.0" prefWidth="170.0" promptText="Teacher Address" />
+      <TextField fx:id="txtSearch" layoutX="309.0" layoutY="126.0" prefHeight="26.0" prefWidth="202.0" promptText="Search here" />
+      <TableView fx:id="tblTeacher" layoutX="40.0" layoutY="165.0" prefHeight="200.0" prefWidth="536.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="63.200016021728516" text="#ID" />
+          <TableColumn fx:id="colName" prefWidth="158.3999481201172" text="Name" />
+            <TableColumn fx:id="colContact" prefWidth="107.20001220703125" text="Contact Number" />
+            <TableColumn fx:id="colAddress" prefWidth="144.0" text="Address" />
+            <TableColumn fx:id="colOption" prefWidth="61.5999755859375" text="option" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

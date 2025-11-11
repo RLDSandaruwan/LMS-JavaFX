@@ -53,4 +53,8 @@ public class DashBoardFormController {
     public void studentManagementOnAction(ActionEvent actionEvent) throws IOException {
         setUi("StudentManagmentForm");
     }
+
+    public void teacherManagementOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("TeacherManagementForm");
+    }
 }
