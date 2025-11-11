@@ -54,6 +54,7 @@ public class StudentManagementFormController {
             }
         });
 
+        //search text
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
             this.searchText = newValue;
             setTableData(newValue);
@@ -149,7 +150,7 @@ public class StudentManagementFormController {
                 setStudentID();
                 clearFields();
                 setTableData(searchText);
-                btnSave.setText("save");
+                btnSave.setText("Save");
 
             }
         }
@@ -157,6 +158,8 @@ public class StudentManagementFormController {
 
     public void newStudentOnAction(ActionEvent actionEvent) {
         clearFields();
+        setStudentID();
+        btnSave.setText("Save");
     }
 
     public void backToHomeOnAction(ActionEvent actionEvent) throws IOException {
