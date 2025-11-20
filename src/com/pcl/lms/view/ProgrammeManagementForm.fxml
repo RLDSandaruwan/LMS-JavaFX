@@ -15,17 +15,17 @@
    <children>
       <TextField fx:id="txtProgramid" editable="false" layoutX="18.0" layoutY="95.0" prefHeight="26.0" prefWidth="122.0" promptText="Program ID" />
       <TextField fx:id="txtProgramName" layoutX="147.0" layoutY="95.0" prefHeight="26.0" prefWidth="158.0" promptText="Program Name" />
-      <Button layoutX="489.0" layoutY="43.0" mnemonicParsing="false" onAction="#newProgramOnAction" prefHeight="26.0" prefWidth="99.0" text="New Program" />
-      <Button layoutX="351.0" layoutY="44.0" mnemonicParsing="false" onAction="#backToHomeOnAction" prefHeight="26.0" prefWidth="121.0" text="Back to Dashboard" />
-      <Separator layoutX="20.0" layoutY="82.0" prefHeight="2.0" prefWidth="600.0" />
-      <Text fill="#6c5ce7" layoutX="50.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="program Management">
+      <Button layoutX="488.0" layoutY="31.0" mnemonicParsing="false" onAction="#newProgramOnAction" prefHeight="26.0" prefWidth="99.0" text="New Program" />
+      <Button layoutX="349.0" layoutY="31.0" mnemonicParsing="false" onAction="#backToHomeOnAction" prefHeight="26.0" prefWidth="121.0" text="Back to Dashboard" />
+      <Separator layoutX="14.0" layoutY="69.0" prefHeight="2.0" prefWidth="600.0" />
+      <Text fill="#6c5ce7" layoutX="36.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="program Management">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
       <TextField fx:id="txtProgramCost" layoutX="314.0" layoutY="95.0" prefHeight="26.0" prefWidth="132.0" promptText="Program Cost" />
       <ComboBox fx:id="cbxTeacher" layoutX="454.0" layoutY="96.0" prefHeight="26.0" prefWidth="132.0" promptText="Teacher" />
-      <TextField fx:id="txtModules" layoutX="20.0" layoutY="129.0" prefHeight="26.0" prefWidth="147.0" promptText="Modules" />
+      <TextField fx:id="txtModules" layoutX="20.0" layoutY="129.0" onAction="#addModulesOnAction" prefHeight="26.0" prefWidth="147.0" promptText="Modules" />
       <TableView fx:id="tblModule" layoutX="22.0" layoutY="163.0" prefHeight="93.0" prefWidth="566.0">
         <columns>
           <TableColumn fx:id="colModuleid" prefWidth="120.0000057220459" text="#ID" />

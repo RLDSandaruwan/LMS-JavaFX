@@ -3,6 +3,7 @@ package com.pcl.lms.controller;
 import com.pcl.lms.DB.Database;
 import com.pcl.lms.model.Program;
 import com.pcl.lms.model.Teacher;
+import com.pcl.lms.model.Module;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ProgrammeManagementFormController {
     public TextField txtProgramid;
@@ -35,6 +37,7 @@ public class ProgrammeManagementFormController {
     public TableColumn colCost;
     public TableColumn colOption;
     public AnchorPane context;
+    static ArrayList<Module> modList = new ArrayList<>();
 
     public void initialize() {
         setProgramid();
@@ -46,7 +49,6 @@ public class ProgrammeManagementFormController {
         for(Teacher t : Database.teacherTable){
             list.add(t.getId().trim()+"-"+t.getName().trim());
         }
-
         cbxTeacher.setItems(list);
     }
 
@@ -63,10 +65,6 @@ public class ProgrammeManagementFormController {
             String genearatedid = "P-" + lastDigit;
             txtProgramid.setText(genearatedid);
         }
-
-
-
-
     }
 
     public void newProgramOnAction(ActionEvent actionEvent) {
@@ -86,5 +84,29 @@ public class ProgrammeManagementFormController {
         Scene scene = new Scene(load);
         Stage stage= (Stage) context.getScene().getWindow();
         stage.setScene(scene);
+    }
+
+    public void addModulesOnAction(ActionEvent actionEvent) {
+        if(txtModules.getText().isEmpty()){
+            return;
+        }else {
+            modList.add(new Module(getModuleid(),txtModules.getText()));
+
+            setModuleTableData();
+        }
+    }
+
+    private void setModuleTableData() {
+
+    }
+
+    private int getModuleid() {
+        boolean modListEmpty = modList.isEmpty();
+        if(!modListEmpty){
+            return 1;
+        }
+        Module lastModule = modList.get(modList.size() -1);
+        int lastid = lastModule.getId();
+        return lastid;
     }
 }
