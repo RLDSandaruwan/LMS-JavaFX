@@ -4,6 +4,7 @@ import com.pcl.lms.DB.Database;
 import com.pcl.lms.model.Program;
 import com.pcl.lms.model.Teacher;
 import com.pcl.lms.model.Module;
+import com.pcl.lms.view.tm.ModulesTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -24,10 +26,10 @@ public class ProgrammeManagementFormController {
     public TextField txtProgramCost;
     public ComboBox<String> cbxTeacher;
     public TextField txtModules;
-    public TableView tblModule;
-    public TableColumn colModuleid;
-    public TableColumn colModuleName;
-    public TableColumn colModuleRemove;
+    public TableView<ModulesTm> tblModule;
+    public TableColumn<ModulesTm,Integer> colModuleid;
+    public TableColumn<ModulesTm,String> colModuleName;
+    public TableColumn<ModulesTm,Button> colModuleRemove;
     public Button btnSave;
     public TableView tblProgram;
     public TableColumn colProgramid;
@@ -40,6 +42,10 @@ public class ProgrammeManagementFormController {
     static ArrayList<Module> modList = new ArrayList<>();
 
     public void initialize() {
+        colModuleid.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colModuleName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colModuleRemove.setCellValueFactory(new PropertyValueFactory<>("btn"));
+        setModuleTableData();
         setProgramid();
         setTeacher();
     }
@@ -93,20 +99,29 @@ public class ProgrammeManagementFormController {
             modList.add(new Module(getModuleid(),txtModules.getText()));
 
             setModuleTableData();
+            txtModules.setText("");
         }
     }
 
     private void setModuleTableData() {
-
+        ObservableList<ModulesTm> list = FXCollections.observableArrayList();
+        for(Module modules : modList){
+            Button btn = new Button("Delete");
+            list.add(new ModulesTm(
+                    modules.getId(),
+                    modules.getName(),
+                    btn
+            ));
+            tblModule.setItems(list);
+        }
     }
 
     private int getModuleid() {
         boolean modListEmpty = modList.isEmpty();
-        if(!modListEmpty){
+        if(modListEmpty){
             return 1;
         }
         Module lastModule = modList.get(modList.size() -1);
-        int lastid = lastModule.getId();
-        return lastid;
+        return lastModule.getId() + 1;
     }
 }
