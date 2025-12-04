@@ -6,7 +6,7 @@ public class Program {
     private String programid;
     private String programname;
     private Double cost;
-    private String taecher;
+    private String teacher;
     private String[] module;
 
     @Override
@@ -15,7 +15,7 @@ public class Program {
                 "programid='" + programid + '\'' +
                 ", programname='" + programname + '\'' +
                 ", cost=" + cost +
-                ", taecher='" + taecher + '\'' +
+                ", teacher='" + teacher + '\'' +
                 ", module=" + Arrays.toString(module) +
                 '}';
     }
@@ -27,7 +27,7 @@ public class Program {
         this.programid = programid;
         this.programname = programname;
         this.cost = cost;
-        this.taecher = taecher;
+        this.teacher = taecher;
         this.module = module;
     }
 
@@ -55,12 +55,12 @@ public class Program {
         this.cost = cost;
     }
 
-    public String getTaecher() {
-        return taecher;
+    public String getTeacher() {
+        return teacher;
     }
 
-    public void setTaecher(String taecher) {
-        this.taecher = taecher;
+    public void setTeacher(String taecher) {
+        this.teacher = teacher;
     }
 
     public String[] getModule() {

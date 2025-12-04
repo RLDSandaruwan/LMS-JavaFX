@@ -77,6 +77,24 @@ public class ProgrammeManagementFormController {
     }
 
     public void saveOnAction(ActionEvent actionEvent) {
+        String [] selectedmodules = new String[modList.size()];
+        int pointer = 0;
+        for(Module mod:modList){
+            selectedmodules[pointer] = mod.getName();
+            pointer++;
+        }
+
+        if(btnSave.getText().equals("Save")){
+            Database.programTable.add(new Program(
+                txtProgramid.getText(),
+                    txtProgramName.getText(),
+                    Double.parseDouble(txtProgramCost.getText()),
+                    cbxTeacher.getValue(),
+                    selectedmodules
+            ));
+            setProgramid();
+            new Alert(Alert.AlertType.INFORMATION, "Program Saved", ButtonType.OK).show();
+        }
     }
 
     public void backToHomeOnAction(ActionEvent actionEvent) throws IOException {
@@ -105,15 +123,23 @@ public class ProgrammeManagementFormController {
 
     private void setModuleTableData() {
         ObservableList<ModulesTm> list = FXCollections.observableArrayList();
-        for(Module modules : modList){
+        for(Module module : modList){
             Button btn = new Button("Delete");
             list.add(new ModulesTm(
-                    modules.getId(),
-                    modules.getName(),
+                    module.getId(),
+                    module.getName(),
                     btn
             ));
-            tblModule.setItems(list);
+            btn.setOnAction(event -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are You Sure?",ButtonType.YES,ButtonType.NO);
+                alert.showAndWait();
+                if(alert.getResult() == ButtonType.YES){
+                    modList.remove(module);
+                    setModuleTableData();
+                }
+            });
         }
+        tblModule.setItems(list);
     }
 
     private int getModuleid() {
