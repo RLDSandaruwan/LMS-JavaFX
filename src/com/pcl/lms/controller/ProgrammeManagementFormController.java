@@ -77,6 +77,16 @@ public class ProgrammeManagementFormController {
                             btnDelete )
 
             );
+            btnDelete.setOnAction(actionEvent -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Are You Sure",ButtonType.YES,ButtonType.NO);
+                alert.showAndWait();
+                if (alert.getResult() == ButtonType.YES) {
+                    Database.programTable.remove(temp);
+                    loadProgramData();
+                    setProgramid();
+                    new Alert(Alert.AlertType.INFORMATION,"Program Deleted",ButtonType.OK).show();
+                }
+            });
         }
         tblProgram.setItems(programOblist);
     }

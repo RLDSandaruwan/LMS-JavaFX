@@ -42,16 +42,6 @@
       <!-- Modules Field -->
       <TextField fx:id="txtModules" layoutX="40.0" layoutY="125.0" onAction="#addModulesOnAction" prefHeight="26.0" prefWidth="200.0" promptText="Modules" />
 
-      <!-- Save Button -->
-      <Button fx:id="btnSave" layoutX="540.0" layoutY="125.0" mnemonicParsing="false" onAction="#saveOnAction" style="-fx-background-color: green;" text="Save" textFill="#fff7f7">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-
-      <!-- Search -->
-      <TextField layoutX="270.0" layoutY="125.0" prefHeight="26.0" prefWidth="260.0" promptText="Search Program" />
-
       <!-- MODULE TABLE -->
       <TableView fx:id="tblModule" layoutX="40.0" layoutY="165.0" prefHeight="100.0" prefWidth="560.0">
          <columns>
@@ -61,8 +51,19 @@
          </columns>
       </TableView>
 
+      <!-- Search moved BELOW module table -->
+      <TextField layoutX="40.0" layoutY="275.0" prefHeight="26.0" prefWidth="400.0" promptText="Search Program" />
+
+      <!-- Save Button moved BELOW module table -->
+      <Button fx:id="btnSave" layoutX="460.0" layoutY="275.0" mnemonicParsing="false" onAction="#saveOnAction"
+              prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: green;" text="Save" textFill="#fff7f7">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+
       <!-- PROGRAM TABLE -->
-      <TableView fx:id="tblProgram" layoutX="40.0" layoutY="275.0" prefHeight="120.0" prefWidth="560.0">
+      <TableView fx:id="tblProgram" layoutX="40.0" layoutY="315.0" prefHeight="120.0" prefWidth="560.0">
          <columns>
             <TableColumn fx:id="colProgramid" prefWidth="60.0" text="#ID" />
             <TableColumn fx:id="colProgramName" prefWidth="130.0" text="Program" />
