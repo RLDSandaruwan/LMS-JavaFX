@@ -41,6 +41,7 @@ public class ProgrammeManagementFormController {
     public TableColumn<ProgramTm,Button> colOption;
     public AnchorPane context;
     static ArrayList<Module> modList = new ArrayList<>();
+    static ObservableList<ModulesTm> list = FXCollections.observableArrayList();
 
     public void initialize() {
         colModuleid.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -54,11 +55,22 @@ public class ProgrammeManagementFormController {
         colCost.setCellValueFactory(new PropertyValueFactory<>("cost"));
         colOption.setCellValueFactory(new PropertyValueFactory<>("btnDelete"));
 
+        tblProgram.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                setData((ProgramTm)newValue);
+            }
+        });
 
         setModuleTableData();
         setProgramid();
         setTeacher();
         loadProgramData();
+
+    }
+
+    private void setData(ProgramTm newValue) {
+        btnSave.setText("Update");
+
     }
 
     private void loadProgramData() {
@@ -86,6 +98,17 @@ public class ProgrammeManagementFormController {
                     setProgramid();
                     new Alert(Alert.AlertType.INFORMATION,"Program Deleted",ButtonType.OK).show();
                 }
+            });
+
+            btnModule.setOnAction(actionEvent -> {
+                Stage stage = new Stage();
+                try {
+                    stage.setScene(new Scene((FXMLLoader.load(getClass().getResource("/com/pcl/lms/view/ModulePopup.fxml")))));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage.setTitle("Module List");
+                stage.show();
             });
         }
         tblProgram.setItems(programOblist);
@@ -173,7 +196,6 @@ public class ProgrammeManagementFormController {
     }
 
     private void setModuleTableData() {
-        ObservableList<ModulesTm> list = FXCollections.observableArrayList();
         for(Module module : modList){
             Button btn = new Button("Delete");
             list.add(new ModulesTm(

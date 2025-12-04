@@ -27,5 +27,6 @@ public class Database {
 //        }
         studentTable.add(new Student("S-6","DS","123", new Date()));
         teacherTable.add(new Teacher("T-1","Gihan","123/4 Kandy","071111678"));
+        teacherTable.add(new Teacher("T-2","Kasun","123/4 Colombo","071111678"));
     }
 }
