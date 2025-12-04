@@ -5,6 +5,7 @@ import com.pcl.lms.model.Program;
 import com.pcl.lms.model.Teacher;
 import com.pcl.lms.model.Module;
 import com.pcl.lms.view.tm.ModulesTm;
+import com.pcl.lms.view.tm.ProgramTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,13 +32,13 @@ public class ProgrammeManagementFormController {
     public TableColumn<ModulesTm,String> colModuleName;
     public TableColumn<ModulesTm,Button> colModuleRemove;
     public Button btnSave;
-    public TableView tblProgram;
-    public TableColumn colProgramid;
-    public TableColumn colProgramName;
-    public TableColumn colTeacher;
-    public TableColumn colModuleList;
-    public TableColumn colCost;
-    public TableColumn colOption;
+    public TableView<ProgramTm> tblProgram;
+    public TableColumn<ProgramTm,String> colProgramid;
+    public TableColumn<ProgramTm,String> colProgramName;
+    public TableColumn<ProgramTm,String> colTeacher;
+    public TableColumn<ProgramTm,Button> colModuleList;
+    public TableColumn<ProgramTm,Double> colCost;
+    public TableColumn<ProgramTm,Button> colOption;
     public AnchorPane context;
     static ArrayList<Module> modList = new ArrayList<>();
 
@@ -45,9 +46,39 @@ public class ProgrammeManagementFormController {
         colModuleid.setCellValueFactory(new PropertyValueFactory<>("id"));
         colModuleName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colModuleRemove.setCellValueFactory(new PropertyValueFactory<>("btn"));
+
+        colProgramid.setCellValueFactory(new PropertyValueFactory<>("programid"));
+        colProgramName.setCellValueFactory(new PropertyValueFactory<>("programName"));
+        colTeacher.setCellValueFactory(new PropertyValueFactory<>("teacher"));
+        colModuleList.setCellValueFactory(new PropertyValueFactory<>("btnModules"));
+        colCost.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        colOption.setCellValueFactory(new PropertyValueFactory<>("btnDelete"));
+
+
         setModuleTableData();
         setProgramid();
         setTeacher();
+        loadProgramData();
+    }
+
+    private void loadProgramData() {
+        ObservableList<ProgramTm> programOblist = FXCollections.observableArrayList();
+
+        for(Program temp:Database.programTable){
+            Button btnModule = new Button("Modules");
+            Button btnDelete = new Button("Delete");
+            programOblist.add(
+                    new ProgramTm(
+                            temp.getProgramid(),
+                            temp.getProgramname(),
+                            temp.getTeacher(),
+                            btnModule,
+                            temp.getCost(),
+                            btnDelete )
+
+            );
+        }
+        tblProgram.setItems(programOblist);
     }
 
     private void setTeacher() {
@@ -93,8 +124,18 @@ public class ProgrammeManagementFormController {
                     selectedmodules
             ));
             setProgramid();
+            clearFields();
+            setModuleTableData();
+            loadProgramData();
             new Alert(Alert.AlertType.INFORMATION, "Program Saved", ButtonType.OK).show();
         }
+    }
+
+    private void clearFields() {
+        txtProgramCost.clear();
+        txtProgramName.clear();
+        cbxTeacher.setPromptText("Teacher");
+        modList.clear();
     }
 
     public void backToHomeOnAction(ActionEvent actionEvent) throws IOException {
