@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class ProgrammeManagementFormController {
     public TextField txtProgramid;
@@ -40,7 +41,7 @@ public class ProgrammeManagementFormController {
     public TableColumn<ProgramTm,Double> colCost;
     public TableColumn<ProgramTm,Button> colOption;
     public AnchorPane context;
-    static ArrayList<Module> modList = new ArrayList<>();
+    ArrayList<Module> modList = new ArrayList<>();
     static ObservableList<ModulesTm> list = FXCollections.observableArrayList();
 
     public void initialize() {
@@ -68,9 +69,12 @@ public class ProgrammeManagementFormController {
 
     }
 
-    private void setData(ProgramTm newValue) {
+    private void setData(ProgramTm tm) {
         btnSave.setText("Update");
-
+        txtProgramid.setText(tm.getProgramid());
+        txtProgramName.setText(tm.getProgramName());
+        txtProgramCost.setText(Double.toString(tm.getCost()));
+        cbxTeacher.setValue(tm.getTeacher());
     }
 
     private void loadProgramData() {
@@ -161,6 +165,18 @@ public class ProgrammeManagementFormController {
             setModuleTableData();
             loadProgramData();
             new Alert(Alert.AlertType.INFORMATION, "Program Saved", ButtonType.OK).show();
+        }else{
+            Optional<Program> selectedProgram = Database.programTable.stream().filter(e -> e.getProgramid().equals(txtProgramid.getText())).findFirst();
+            if(selectedProgram.isPresent()){
+                selectedProgram.get().setProgramname(txtProgramName.getText());
+                selectedProgram.get().setCost(Double.parseDouble(txtProgramCost.getText()));
+                selectedProgram.get().setTeacher(cbxTeacher.getValue());
+                selectedProgram.get().setModule(selectedmodules);
+
+                loadProgramData();
+                clearFields();
+                btnSave.setText("Save");
+            }
         }
     }
 
@@ -196,6 +212,8 @@ public class ProgrammeManagementFormController {
     }
 
     private void setModuleTableData() {
+        list.clear();
+
         for(Module module : modList){
             Button btn = new Button("Delete");
             list.add(new ModulesTm(
