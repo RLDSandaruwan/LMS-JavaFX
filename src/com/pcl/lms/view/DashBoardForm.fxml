@@ -85,7 +85,7 @@
                     </cursor>
                 </Button>
 
-                <Button prefHeight="100.0" prefWidth="120.0" style="-fx-background-color: #ff7675; -fx-background-radius: 8;" text="PROGRAMS" textAlignment="CENTER" textFill="WHITE">
+                <Button onAction="#programmeManagementOnAction" prefHeight="100.0" prefWidth="120.0" style="-fx-background-color: #ff7675; -fx-background-radius: 8;" text="PROGRAMS" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>

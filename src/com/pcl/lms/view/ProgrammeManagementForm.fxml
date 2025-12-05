@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="context" prefHeight="410.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pcl.lms.controller.ProgrammeManagementFormController">
+
+   <children>
+
+      <!-- Title -->
+      <Text fill="#6c5ce7" layoutX="40.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program Management">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+
+      <!-- Top Buttons -->
+      <Button layoutX="480.0" layoutY="33.0" mnemonicParsing="false" onAction="#newProgramOnAction" prefHeight="26.0" prefWidth="100.0" text="New Program" />
+
+      <Button layoutX="341.0" layoutY="34.0" mnemonicParsing="false" onAction="#backToHomeOnAction" prefHeight="26.0" prefWidth="121.0" text="Back to Dashboard" />
+
+      <!-- Separator -->
+      <Separator layoutX="10.0" layoutY="72.0" prefHeight="2.0" prefWidth="600.0" />
+
+      <!-- Input Fields -->
+      <TextField fx:id="txtProgramid" editable="false" layoutX="40.0" layoutY="85.0" prefHeight="26.0" prefWidth="150.0" promptText="Program ID" />
+
+      <TextField fx:id="txtProgramName" layoutX="200.0" layoutY="85.0" prefHeight="26.0" prefWidth="170.0" promptText="Program Name" />
+
+      <TextField fx:id="txtProgramCost" layoutX="380.0" layoutY="85.0" prefHeight="26.0" prefWidth="100.0" promptText="Cost" />
+
+      <ComboBox fx:id="cbxTeacher" layoutX="490.0" layoutY="85.0" prefHeight="26.0" prefWidth="110.0" promptText="Teacher" />
+
+      <!-- Modules Field -->
+      <TextField fx:id="txtModules" layoutX="40.0" layoutY="125.0" onAction="#addModulesOnAction" prefHeight="26.0" prefWidth="200.0" promptText="Modules" />
+
+      <!-- MODULE TABLE -->
+      <TableView fx:id="tblModule" layoutX="40.0" layoutY="165.0" prefHeight="100.0" prefWidth="560.0">
+         <columns>
+            <TableColumn fx:id="colModuleid" prefWidth="80.0" text="#ID" />
+            <TableColumn fx:id="colModuleName" prefWidth="310.0" text="Module Name" />
+            <TableColumn fx:id="colModuleRemove" prefWidth="130.0" text="Remove" />
+         </columns>
+      </TableView>
+
+      <!-- Search moved BELOW module table -->
+      <TextField fx:id="txtSearch" layoutX="40.0" layoutY="275.0" prefHeight="26.0" prefWidth="400.0" promptText="Search Program" />
+
+      <!-- Save Button moved BELOW module table -->
+      <Button fx:id="btnSave" layoutX="460.0" layoutY="275.0" mnemonicParsing="false" onAction="#saveOnAction" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: green;" text="Save" textFill="#fff7f7">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+
+      <!-- PROGRAM TABLE -->
+      <TableView fx:id="tblProgram" layoutX="40.0" layoutY="315.0" prefHeight="120.0" prefWidth="560.0">
+         <columns>
+            <TableColumn fx:id="colProgramid" prefWidth="60.0" text="#ID" />
+            <TableColumn fx:id="colProgramName" prefWidth="130.0" text="Program" />
+            <TableColumn fx:id="colTeacher" prefWidth="120.0" text="Teacher" />
+            <TableColumn fx:id="colModuleList" prefWidth="88.0" text="Modules" />
+            <TableColumn fx:id="colCost" prefWidth="84.80001831054688" text="Cost" />
+            <TableColumn fx:id="colOption" prefWidth="77.5999755859375" text="Option" />
+         </columns>
+      </TableView>
+
+   </children>
+</AnchorPane>
