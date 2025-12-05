@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane fx:id="context" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pcl.lms.controller.IntakeManagementFormController">
+   <children>
+      <Text fill="#6c5ce7" layoutX="40.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intake Management">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Separator layoutX="10.0" layoutY="72.0" prefHeight="2.0" prefWidth="600.0" />
+      <TextField fx:id="txtid" layoutX="22.0" layoutY="82.0" prefHeight="26.0" prefWidth="169.0" promptText="Intake ID" />
+      <Button fx:id="btnSave" layoutX="446.0" layoutY="117.0" mnemonicParsing="false" onAction="#saveOnAction" style="-fx-background-color: green;" text="Save" textFill="#fff7f7">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="479.0" layoutY="33.0" mnemonicParsing="false" onAction="#newIntakeOnAction" prefHeight="26.0" prefWidth="99.0" text="New Intake" />
+      <Button layoutX="341.0" layoutY="34.0" mnemonicParsing="false" onAction="#backToHomeOnAction" prefHeight="26.0" prefWidth="121.0" text="Back to Dashboard" />
+      <DatePicker fx:id="dteStart" layoutX="208.0" layoutY="82.0" promptText="Start Date" />
+      <TextField fx:id="txtName" layoutX="402.0" layoutY="81.0" prefHeight="26.0" prefWidth="169.0" promptText="Intake Name" />
+      <ComboBox fx:id="cmbProgram" layoutX="22.0" layoutY="117.0" prefWidth="150.0" promptText="Program Name" />
+      <TextField fx:id="txtSearch" layoutX="192.0" layoutY="116.0" prefHeight="26.0" prefWidth="244.0" promptText="Search Here" />
+      <TableView fx:id="tblIntake" layoutX="24.0" layoutY="156.0" prefHeight="200.0" prefWidth="569.0">
+        <columns>
+          <TableColumn fx:id="colid" prefWidth="75.0" text="#id" />
+          <TableColumn fx:id="colName" prefWidth="174.3999481201172" text="Intake Name" />
+            <TableColumn fx:id="colDate" prefWidth="97.60003662109375" text="Start Date" />
+            <TableColumn fx:id="colProgram" prefWidth="137.5999755859375" text="Program" />
+            <TableColumn fx:id="colOption" prefWidth="85.60003662109375" text="Option" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
