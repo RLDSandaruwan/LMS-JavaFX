@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class IntakeManagementFormController {
     public AnchorPane context;
@@ -22,7 +24,7 @@ public class IntakeManagementFormController {
     public Button btnSave;
     public DatePicker dteStart;
     public TextField txtName;
-    public ComboBox cmbProgram;
+    public ComboBox<String> cmbProgram;
     public TextField txtSearch;
     public TableView tblIntake;
     public TableColumn colid;
@@ -58,6 +60,23 @@ public class IntakeManagementFormController {
     }
 
     public void saveOnAction(ActionEvent actionEvent) {
+        if(btnSave.getText().equals("Save")){
+            Database.intakeTable.add(new Intake(
+                    txtid.getText(),
+                    txtName.getText(),
+                    Date.from(dteStart.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                    cmbProgram.getValue()
+            ));
+            new Alert(Alert.AlertType.INFORMATION,"New Intake Saved").show();
+            setIntakeid();
+            setProgramsData();
+            clearFileds();
+        }
+    }
+
+    private void clearFileds() {
+        txtName.clear();
+        dteStart.setValue(null);
     }
 
     public void newIntakeOnAction(ActionEvent actionEvent) {
