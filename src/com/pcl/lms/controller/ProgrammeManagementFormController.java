@@ -88,7 +88,7 @@ public class ProgrammeManagementFormController {
         ObservableList<ProgramTm> programOblist = FXCollections.observableArrayList();
 
         for(Program temp:Database.programTable){
-            if (temp.getProgramname().contains(searchText.toLowerCase())) {
+            if (temp.getProgramname().toLowerCase().contains(searchText.toLowerCase())) {
                 Button btnModule = new Button("Modules");
                 Button btnDelete = new Button("Delete");
                 programOblist.add(
