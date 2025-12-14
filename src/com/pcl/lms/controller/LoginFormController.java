@@ -18,6 +18,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class LoginFormController {
@@ -39,18 +43,39 @@ public class LoginFormController {
     public void navigateDashboardOnAction(ActionEvent actionEvent) throws IOException {
         String email = txtEmail.getText();
         String password = txtPassword.getText();
-        Optional<User> selectUser= Database.userTable.stream().filter(u -> u.getEmail().equals(email)).findFirst();
-        if (selectUser.isPresent()) {
-            if(new PasswordManager().decode(password,selectUser.get().getPassword())){
-                new Alert(Alert.AlertType.INFORMATION,"Welcome").show();
-                setUi("DashBoardForm");
-            }else{
-                new Alert(Alert.AlertType.ERROR,"Wrong Password").show();
-            }
-        }else {new Alert(Alert.AlertType.ERROR,"User not found").show();}
 
+        try{
+            boolean login=loginWithMyql(email,password);
+            if(login){
+                setUi("DashboardForm");
+                new Alert(Alert.AlertType.INFORMATION,"Welcome"+email).show();
+
+            }else {
+                new Alert(Alert.AlertType.INFORMATION,"some thing went wrong").show();
+            }
+        }catch (ClassNotFoundException | SQLException e){
+            e.printStackTrace();
+        }
     }
 
+    private boolean loginWithMyql(String email, String password) throws ClassNotFoundException, SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        PreparedStatement ps = connection.prepareStatement("SELECT email,password FROM user WHERE email=?");
+        ps.setString(1,email);
+        ResultSet set = ps.executeQuery();
+        if (set.next()) {
+            if (new PasswordManager().check(password,set.getString("password"))) {
+                return true;
+            }else {
+                return false;
+            }
+        }else {
+            return false;
+        }
+
+
+    }
     public void navigateForgotPasswordOnAction(ActionEvent actionEvent) throws IOException {
         setUi("EmailVerificationForm");
     }

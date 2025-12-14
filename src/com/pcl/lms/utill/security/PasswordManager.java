@@ -7,7 +7,7 @@ public class PasswordManager {
         return BCrypt.hashpw(rowPassword, BCrypt.gensalt(10));
     }
 
-    public boolean decode(String rowPassword,String hashedPassword){
+    public boolean check(String rowPassword,String hashedPassword){
         return BCrypt.checkpw(rowPassword,hashedPassword);
     }
 }

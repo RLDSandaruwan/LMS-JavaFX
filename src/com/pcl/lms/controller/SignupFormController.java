@@ -18,6 +18,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class SignupFormController {
     public PasswordField txtPassword;
@@ -48,17 +52,37 @@ public class SignupFormController {
         int age = Integer.parseInt(txtAge.getText());
         String password = new PasswordManager().encode(txtPassword.getText());
 
-        boolean emailExists = Database.userTable.stream().anyMatch(u -> u.getEmail().equals(email));
-        if(emailExists){
-            new Alert(Alert.AlertType.ERROR, "Email already exists").show();
-            return;
-        }
-        User user = new User(fullName, email, age, password);
-        Database.userTable.add(user);
-        System.out.println(user.toString());
-        new Alert(Alert.AlertType.INFORMATION, "Account created successfully").show();
+        User user = new User(email,fullName,age,password);
+        try{
+            signup(user);
+            System.out.println(user.toString());
 
-        setUi("LoginForm");
+            new Alert(Alert.AlertType.INFORMATION,"Account Created").show();
+            setUi("LoginForm");
+        }catch (ClassNotFoundException | SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    private boolean signup(User user) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/nextstackmvc","root","Hello@123");
+        /*String sql="INSERT INTO user VALUES('"+user.getEmail()+"','"+user.getFullName()+"','"+user.getAge()+"','"+user.getPassword())";*/
+
+        String sql="INSERT INTO user VALUES(?,?,?,?)";
+
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, user.getEmail());
+        ps.setString(2,user.getFullName());
+        ps.setInt(3,user.getAge());
+        ps.setString(4,user.getPassword());
+/*
+        int rowCount = ps.executeUpdate();
+        if (rowCount > 0) {
+            return true;
+        }return false;*/
+        return ps.executeUpdate()>0;
     }
 
     private void setUi(String location) throws IOException {
