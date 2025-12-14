@@ -61,4 +61,8 @@ public class DashBoardFormController {
     public void programmeManagementOnAction(ActionEvent actionEvent) throws IOException {
         setUi("ProgrammeManagementForm");
     }
+
+    public void intakemeManagementOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("IntakeManagementForm");
+    }
 }
