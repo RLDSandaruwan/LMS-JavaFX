@@ -20,7 +20,7 @@
          </font>
       </Text>
       <Separator layoutX="10.0" layoutY="72.0" prefHeight="2.0" prefWidth="600.0" />
-      <TextField fx:id="txtid" layoutX="22.0" layoutY="82.0" prefHeight="26.0" prefWidth="169.0" promptText="Intake ID" />
+      <TextField fx:id="txtid" editable="false" layoutX="22.0" layoutY="82.0" prefHeight="26.0" prefWidth="169.0" promptText="Intake ID" />
       <Button fx:id="btnSave" layoutX="446.0" layoutY="117.0" mnemonicParsing="false" onAction="#saveOnAction" style="-fx-background-color: green;" text="Save" textFill="#fff7f7">
          <cursor>
             <Cursor fx:constant="HAND" />

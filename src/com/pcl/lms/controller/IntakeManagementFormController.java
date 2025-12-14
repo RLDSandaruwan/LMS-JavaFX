@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Optional;
 
 public class IntakeManagementFormController {
     public AnchorPane context;
@@ -51,6 +52,20 @@ public class IntakeManagementFormController {
             this.SearchText = newValue;
             loadTableData(SearchText);
         });
+
+        tblIntake.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue!=null){
+                setDataForm((IntakeTm)newValue);
+            }
+        });
+    }
+
+    private void setDataForm(IntakeTm tm) {
+        txtid.setText(tm.getIntakeid());
+        txtName.setText(tm.getIntakeName());
+        dteStart.setValue(tm.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        cmbProgram.setValue(tm.getProgramName());
+        btnSave.setText("Update");
     }
 
     private void loadTableData(String searchText) {
@@ -116,6 +131,20 @@ public class IntakeManagementFormController {
             clearFileds();
             loadTableData(SearchText);
         }
+        else{
+            Optional<Intake> selectedIntake = Database.intakeTable.stream().filter(e -> e.getId().equals(txtid.getText())).findFirst();
+            if (selectedIntake.isPresent()){
+                selectedIntake.get().setName(txtName.getText());
+                selectedIntake.get().setDate(Date.from(dteStart.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                selectedIntake.get().setProgramName(cmbProgram.getValue());
+
+                new Alert(Alert.AlertType.INFORMATION,selectedIntake.get().getId() + " Intake Updated").show();
+                clearFileds();
+                btnSave.setText("Save");
+                loadTableData(SearchText);
+                setIntakeid();
+            }
+        }
     }
 
     private void clearFileds() {
@@ -124,6 +153,9 @@ public class IntakeManagementFormController {
     }
 
     public void newIntakeOnAction(ActionEvent actionEvent) {
+        clearFileds();
+        setIntakeid();
+        btnSave.setText("Save");
     }
 
     public void backToHomeOnAction(ActionEvent actionEvent) throws IOException {
