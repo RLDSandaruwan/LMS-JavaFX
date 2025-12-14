@@ -103,7 +103,7 @@
                     </cursor>
                 </Button>
 
-                <Button prefHeight="100.0" prefWidth="520.0" style="-fx-background-color: #B33771; -fx-background-radius: 8;" text="STUDENT REGISTRATION" textAlignment="CENTER" textFill="WHITE">
+                <Button onAction="#StudentRegistationOnAction" prefHeight="100.0" prefWidth="520.0" style="-fx-background-color: #B33771; -fx-background-radius: 8;" text="STUDENT REGISTRATION" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="20.0" />
                     </font>
